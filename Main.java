@@ -1,8 +1,13 @@
+
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -28,7 +33,7 @@ public class Main extends JFrame{
         lblPassword = new JLabel("Password :");
         
         btnLogin = new JButton("Login");
-        btnLogin.addActionListener(new UserInterface);
+        btnLogin.addActionListener(new UserInterface());
         btnRegister = new JButton("Register");
 
         panel1 = new JPanel(new GridLayout(3,2));
@@ -56,5 +61,14 @@ public class Main extends JFrame{
     public static void main(String args[])
     {
         Main frame = new Main("title");
+    }
+
+    public class UserInterface  implements ActionListener{
+
+        public void actionPerformed(ActionEvent e)
+        {
+            dispose(); // Close the frame
+            AdminInterface adminInterface = new AdminInterface("Admin Interface");
+        }
     }
 }
