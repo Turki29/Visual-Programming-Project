@@ -1,6 +1,6 @@
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class Main extends JFrame{
     
@@ -26,7 +26,13 @@ public class Main extends JFrame{
         lblPassword = new JLabel("Password :");
         
         btnLogin = new JButton("Login");
-        btnLogin.addActionListener(new patient_page());
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new patient_page("Patient Page"); 
+            }
+        });
+        
         btnRegister = new JButton("Register");
 
         p0 = new JPanel(new FlowLayout());
@@ -62,13 +68,5 @@ public class Main extends JFrame{
     public static void main(String args[])
     {
         Main frame = new Main("Hospital");
-    }
-
-    private class patient_page implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        patient_page frame = new patient_page("patient");
-        }
     }
 }
