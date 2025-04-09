@@ -1,3 +1,5 @@
+package com.example;
+
 public class Doctor extends Person {
     
     public String speciality, startWorkingHours, endWorkingHours;

@@ -1,3 +1,5 @@
+package com.example;
+
 public class Patient extends Person{
 
     public int weight, tall, bloodPressure, bloodSugar;

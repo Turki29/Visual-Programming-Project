@@ -1,17 +1,21 @@
+package com.example;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Main extends JFrame{
+public class App extends JFrame{
     
     private JPanel p0,p1,p2,p3;
     private JTextField fieldUsername, fieldPassword; 
     private JLabel lblHeading, lblUsername, lblPassword ;
     private JButton btnRegister, btnLogin;
-    public Main(String title )
+    public App(String title )
     {
-        super(title);
         
+
+        super(title);
+        FirebaseService f = new FirebaseService();
         this.setLocation(1040,540);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = (JPanel)this.getContentPane();
@@ -66,7 +70,7 @@ public class Main extends JFrame{
 
     public static void main(String args[])
     {
-        Main frame = new Main("Hospital");
+        App frame = new App("Hospital");
     }
 
 
