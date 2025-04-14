@@ -24,31 +24,31 @@ private JTextField TFPMeds;
     
     JPanel P1 = new JPanel(new GridLayout(2,1));
     JPanel P11 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JPanel P12 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    //JPanel P12 = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
      LDocName = new JLabel("Doctor : Nawaf Almutairi");
      AccessBtn = new JButton("Access Patient Records");
      AccessBtn.addActionListener(new AccessActionListener());
      P11.add(LDocName);
-     P12.add(AccessBtn);
+     P11.add(AccessBtn);
      P1.add(P11);
-     P1.add(P12);
+    // P1.add(P12);
      //
-     JPanel P2 = new JPanel(new BorderLayout());
+     JPanel P2 = new JPanel(new GridLayout(2,1));
      JPanel P21 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-     JPanel P22 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+     JPanel P22 = new JPanel();
  
      LApptmnts = new JLabel("Appointments: ");
      Apptmnts = new JComboBox(Pat);
      Can1Btn = new JButton("Cancel");
      ReschdBtn = new JButton("Reschedule");
      ReschdBtn.addActionListener(new ReschdActionListener());
-     P2.add(LApptmnts,BorderLayout.NORTH);
+     P21.add(LApptmnts,BorderLayout.NORTH);
      P21.add(Apptmnts );
      P22.add(Can1Btn );
      P22.add(ReschdBtn);
-     P2.add(P21,BorderLayout.CENTER);
-     P2.add(P22,BorderLayout.SOUTH);
+     P2.add(P21);
+     P2.add(P22);
      //
      JPanel P3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
      PMeds = new JLabel("Prescribe Medication : ");
