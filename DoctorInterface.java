@@ -24,7 +24,6 @@ private JTextField TFPMeds;
     
     JPanel P1 = new JPanel(new GridLayout(2,1));
     JPanel P11 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    //JPanel P12 = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
      LDocName = new JLabel("Doctor : Nawaf Almutairi");
      AccessBtn = new JButton("Access Patient Records");
@@ -32,7 +31,6 @@ private JTextField TFPMeds;
      P11.add(LDocName);
      P11.add(AccessBtn);
      P1.add(P11);
-    // P1.add(P12);
      //
      JPanel P2 = new JPanel(new GridLayout(2,1));
      JPanel P21 = new JPanel(new FlowLayout(FlowLayout.LEFT));
