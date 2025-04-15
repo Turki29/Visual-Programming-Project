@@ -4,12 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,12 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.example.AdminInterface.AdminInterface;
-import com.example.Data.*;
+import com.example.Data.DbConnection;
+import com.example.Data.UsersDbCommands;
 import com.example.DoctorInterface.DoctorInterface;
-import com.example.Models.Doctor;
 import com.example.Models.Person;
 import com.example.PatientInterface.PatientsInterface;
-
 
 public class App extends JFrame {
 
@@ -32,7 +26,6 @@ public class App extends JFrame {
     private JTextField fieldUsername, fieldPassword;
     private JLabel lblHeading, lblUsername, lblPassword;
     private JButton btnRegister, btnLogin;
-    private Connection connection;
 
     public App(String title) {
         super(title);
@@ -51,6 +44,7 @@ public class App extends JFrame {
 
         btnLogin = new JButton("Login");
         btnLogin.addActionListener(new UserInterface());
+        
         btnRegister = new JButton("Register");
         btnRegister.addActionListener(e -> new RegisterPage("Register Page"));
 
@@ -74,49 +68,65 @@ public class App extends JFrame {
 
         this.pack();
         setVisible(true);
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        
     }
 
-    public class UserInterface implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String username = fieldUsername.getText().trim();
-            String password = fieldPassword.getText().trim();
+public class UserInterface implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        String username = fieldUsername.getText().trim();
+        String password = fieldPassword.getText().trim();
 
-           
-             
-
-             
-
-            switch (username.toLowerCase()) {
-                case "admin":
-                    new AdminInterface("Admin Interface");
-                    break;
-                case "patient":
-                    new PatientsInterface("Patients Interface");
-                    break;
-                case "doctor":
-                    
-                    new DoctorInterface( "Doctor Interface");
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Unknown role.");
-            }
-               
-
-            
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter both username and password.");
+            return;
         }
 
-       
+        UsersDbCommands db = new UsersDbCommands();
+        List<Person> users = db.getUsers("name = '" + username + "'");
+        if (users.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "User not found.");
+            return;
+        }
+
+        Person user = users.get(0);
+        System.out.println("🔐 Password from DB: " + user.getPassword());
+        System.out.println("🔐 Password entered: " + password);
+
+        if (!user.getPassword().equals(password)) {
+            JOptionPane.showMessageDialog(null, "Invalid password.");
+            return;
+        }
+
+        switch (user.getRole().toLowerCase()) {
+            case "admin":
+                new AdminInterface("Admin Interface", user); // تأكد أنك مررته
+                break;
+            case "doctor":
+                new DoctorInterface("Doctor Interface", user);
+                break;
+            case "patient":
+            new PatientsInterface("Patients Interface", user);
+            // ✅ هذا هو التصحيح المهم
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Unknown role: " + user.getRole());
+        }
     }
+}
+
 
     public static void main(String[] args) {
         
-        UsersDbCommands db = new UsersDbCommands();
-        db.DeleteUser(1);
-        App frame = new App("Hospital");
-
-    }
+            // 1. فتح اتصال بقاعدة البيانات
+            DbConnection connection = new DbConnection();
+        
+            //connection.initializeDatabase();
+        
+            // 4. إطلاق واجهة المستخدم الرسومية
+            App frame = new App("Hospital");
+        
+         
+        
     
+    }
 }
