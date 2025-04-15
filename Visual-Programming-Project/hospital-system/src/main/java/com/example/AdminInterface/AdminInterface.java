@@ -9,7 +9,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.example.Models.Person;
 
 
 public class AdminInterface extends JFrame {
@@ -18,11 +21,13 @@ public class AdminInterface extends JFrame {
     JPanel mainPanel;
     boolean disableMainWindow = false;
     boolean disableDoctorWindow = false;
+    JLabel lbAdminName;
+    Person admin;
 
-   
-
-    public AdminInterface(String title) {
+    public AdminInterface(String title,Person admin) {
         super(title);
+        this.admin = admin;
+        lbAdminName = new JLabel("Admin Name: " + admin.getName() , JLabel.LEFT);
         JPanel panel = (JPanel) this.getContentPane();
 
         btnShowManageDoctors = new JButton("Manage Doctors");

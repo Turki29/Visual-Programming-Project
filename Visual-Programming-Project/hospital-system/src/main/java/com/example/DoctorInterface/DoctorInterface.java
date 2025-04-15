@@ -17,6 +17,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.example.Models.Person;
+
 public class DoctorInterface extends JFrame {
 private JButton Can1Btn, ReschdBtn,AccessBtn,CnfrmBtn,Can2Btn,LogOutBtn;
 private JComboBox Apptmnts,PatPick;
@@ -25,7 +27,7 @@ private String arrPatPick [] = { "Ali Fahad ", "Sarah Mohammad "};
 private JLabel LPatRec,PMeds,PName,LApptmnts;
 private JTextField TFPMeds;
 
-    public DoctorInterface(String title) {
+    public DoctorInterface(String title,Person doc)  {
     super(title);
     this.setSize(300,300);
     this.setLocation(100,400);
@@ -187,8 +189,5 @@ private JTextField TFPMeds;
         }
    
     
-    public static void main(String[] args) {
-      DoctorInterface DI = new DoctorInterface("Home Page");
-       
-    }
+   
 }

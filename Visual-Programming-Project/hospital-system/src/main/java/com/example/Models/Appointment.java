@@ -1,14 +1,22 @@
 package com.example.Models;
 
 public class Appointment {
-    
-    public String patient, doctor, time, clinicName;
+    private int id, patientId;
+    private String department, doctor, day, time;
 
-    public Appointment(String patient, String doctor, String time, String clinicName)
-    {
-        this.patient = patient;
+    public Appointment(int id, int patientId, String department, String doctor, String day, String time) {
+        this.id = id;
+        this.patientId = patientId;
+        this.department = department;
         this.doctor = doctor;
+        this.day = day;
         this.time = time;
-        this.clinicName = clinicName;
     }
+
+    public int getId() { return id; }
+    public int getPatientId() { return patientId; }
+    public String getDepartment() { return department; }
+    public String getDoctor() { return doctor; }
+    public String getDay() { return day; }
+    public String getTime() { return time; }
 }
